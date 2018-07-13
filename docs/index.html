@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Collapsible - A plug and play plugin for expanding and collapsing elements (i.e. accordion) on a website.</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+
+		body * {
+			box-sizing: border-box;
+			color: #59547c;
+			margin: 0;
+		}
+
+		main {
+			max-width: 30rem;
+			margin: 0 auto;
+			padding: 1rem;
+		}
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+
+		.block {
+			margin-bottom: 1rem;
+			border: 1px solid slateblue;
+			border-radius: .125rem;
+			box-shadow: 0 2px 4px gainsboro;
+			overflow: hidden;
+			transition: max-height 200ms;
+		}
+
+		.block p {
+			margin: 0;
+			line-height: 1.4;
+		}
+
+		.block p + p {
+			margin-top: 1em;
+		}
+
+		.block__title {
+			position: relative;
+			padding: 1rem;
+			padding-right: 2rem;
+			line-height: 1rem;
+			font-weight: bold;
+			background-color: slateblue;
+			cursor: pointer;
+			user-select: none;
+			color: white;
+		}
+
+		.block__title h3 {
+			margin: 0;
+			color: white;
+		}
+
+		.block__title::after {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: .75em;
+			height: 100%;
+			padding-right: 1rem;
+			font-size: 1.17em;
+			background: slateblue;
+		}
+
+		.block.is-collapsed .block__title::after {
+			content: '+';
+		}
+
+		.block.is-expanded .block__title::after {
+			content: '-';
+		}
+
+		.block__content {
+			padding: 1rem;
+		}
+	</style>
+</head>
+<body>
+	<main>
+    <h1>Collapsible</h1>
+    <p>A plug and play plugin for expanding and collapsing elements (i.e. accordion) on a website.</p>
+		<div class="block" data-collapsible>
+			<div class="block__title"><h3>Facilis dolor</h3></div>
+			<div class="block__content">
+				<p>Est natus repudiandae, temporibus similique et, voluptas veritatis sit eum facilis dolor aliquam dignissimos obcaecati minus pariatur quam doloribus! Deserunt, rem architecto.</p>
+			</div>
+		</div>
+		<div class="block" data-collapsible>
+			<div class="block__title"><h3>Provident accusantium</h3></div>
+			<div class="block__content">
+				<p>Ducimus minima incidunt iste, asperiores nam eum provident accusantium animi culpa? Odit molestias eum natus omnis illo, veniam debitis est adipisci quisquam?</p>
+				<p>At voluptatibus dignissimos itaque, architecto ipsum inventore laborum officiis assumenda a deserunt ducimus, asperiores odio autem minima accusantium, est magnam praesentium quasi?</p>
+				<p>Magnam laboriosam modi perspiciatis ipsum aliquam similique porro velit deleniti dolorem minus quos, reprehenderit nemo aliquid exercitationem doloremque id! Quidem, quasi at!</p>
+			</div>
+		</div>
+		<div class="block" data-collapsible>
+			<div class="block__title"><h3>Voluptas excepturi</h3></div>
+			<div class="block__content">
+				<p>Consequatur reiciendis cumque dolorum repudiandae voluptas excepturi, minus repellat pariatur sequi, quam voluptatem repellendus perspiciatis libero nesciunt molestias autem aspernatur officiis illum!</p>
+				<p>Ducimus nihil repellat voluptate quo perspiciatis, magnam libero qui veniam, est facilis maxime nostrum in dicta accusamus iste voluptates consequatur nisi enim?</p>
+			</div>
+		</div>
+	</main>
+	<script src="../collapsible.js"></script>
+	<script>
+		new Collapsible(
+			document.querySelectorAll('.block'),
+			'.block__title',
+			true
+		);
+	</script>
+</body>
+</html>
