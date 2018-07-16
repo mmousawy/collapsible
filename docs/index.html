@@ -4,136 +4,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Collapsible - A plug and play plugin for expanding and collapsing elements (i.e. accordion) on a website.</title>
-	<style>
-		body {
-			font-family: sans-serif;
-		}
-
-		body * {
-			box-sizing: border-box;
-			color: #59547c;
-			margin: 0;
-		}
-
-		main {
-			max-width: 40rem;
-			margin: 0 auto;
-			padding: 1rem;
-		}
-
-    h1 {
-      margin-bottom: 1rem;
-    }
-
-    p {
-      margin-bottom: 2rem;
-    }
-
-		.category {
-			overflow: hidden;
-			transition: max-height 500ms;
-		}
-
-		.category + .category {
-			margin-top: 2rem;
-		}
-
-		.category__title {
-			position: relative;
-			padding: 1rem;
-			padding-left: 1.25rem;
-			font-weight: bold;
-			cursor: pointer;
-			user-select: none;
-		}
-
-		.category__title:hover {
-			opacity: .75;
-		}
-
-		.category__title::before {
-			content: '▶';
-			position: absolute;
-			top: 1rem;
-			left: 0;
-			transform: scale(.75);
-			transition: transform 500ms;
-		}
-
-		.category.is-expanded .category__title::before {
-			transform: scale(.75) rotate(90deg);
-		}
-
-		.block {
-			margin-bottom: 1rem;
-			border: 1px solid slateblue;
-			border-radius: .125rem;
-			box-shadow: 0 2px 4px gainsboro;
-			overflow: hidden;
-			transition: max-height 500ms;
-		}
-
-		.block p {
-			margin: 0;
-			line-height: 1.4;
-		}
-
-		.block p + p {
-			margin-top: 1em;
-		}
-
-		.block__title {
-			position: relative;
-			padding: 1rem;
-			padding-right: 2rem;
-			line-height: 1rem;
-			font-weight: bold;
-			background-color: slateblue;
-			cursor: pointer;
-			user-select: none;
-			color: white;
-		}
-
-		.block__title h3 {
-			margin: 0;
-			color: white;
-		}
-
-		.block__title::after {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: .75em;
-			height: 100%;
-			padding-right: 1rem;
-			font-size: 1.17em;
-			background: slateblue;
-		}
-
-		.block.is-collapsed .block__title::after {
-			content: '+';
-		}
-
-		.block.is-expanded .block__title::after {
-			content: '-';
-		}
-
-		.block__content {
-			padding: 1rem;
-		}
-	</style>
+	<title>Collapsible - A plug and play plugin for expanding and collapsing elements (i.e. an accordion) on a website.</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 	<main>
     <h1>Collapsible</h1>
-		<p>A plug and play plugin for expanding and collapsing elements (i.e. accordion) on a website.</p>
-		<div class="category" data-collapsible>
+		<p class="intro">A plug and play plugin for expanding and collapsing elements (i.e.&nbsp;accordion) on a website.</p>
+		<div class="category list-a" data-collapsible>
 			<div class="category__title"><span>Category list A</span></div>
+
 			<div class="block" data-collapsible>
 				<div class="block__title"><h3>Facilis dolor</h3></div>
 				<div class="block__content">
@@ -157,7 +38,7 @@
 			</div>
 		</div>
 
-		<div class="category" data-collapsible data-collapsible-collapsed>
+		<div class="category list-b" data-collapsible data-collapsible-collapsed>
 			<div class="category__title"><span>Category List B</span></div>
 
 			<div class="block" data-collapsible>
@@ -184,18 +65,28 @@
 		</div>
 	</main>
 
-	<script src="collapsible.js"></script>
-	<script>
-		new Collapsible(
-			document.querySelectorAll('.block'),
-			'.block__title',
-			true
-		);
+	<aside>
+		<fieldset>
+			<legend>List A</legend>
+			<div class="buttons">
+				<button class="add-item" data-target=".list-a">Add item</button>
+				<button class="remove-item" data-target=".list-a">Remove item</button>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>List B</legend>
+			<div class="buttons">
+				<button class="add-item" data-target=".list-b">Add item</button>
+				<button class="remove-item" data-target=".list-b">Remove item</button>
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Log</legend>
+			<textarea class="log" disabled></textarea>
+		</fieldset>
+	</aside>
 
-		new Collapsible(
-			document.querySelectorAll('.category'),
-			'.category__title'
-		);
-	</script>
+	<script src="collapsible.js"></script>
+	<script src="demo.js"></script>
 </body>
 </html>
