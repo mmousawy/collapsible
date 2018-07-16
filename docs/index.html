@@ -17,7 +17,7 @@
 		}
 
 		main {
-			max-width: 30rem;
+			max-width: 40rem;
 			margin: 0 auto;
 			padding: 1rem;
 		}
@@ -30,13 +30,48 @@
       margin-bottom: 2rem;
     }
 
+		.category {
+			overflow: hidden;
+			transition: max-height 500ms;
+		}
+
+		.category + .category {
+			margin-top: 2rem;
+		}
+
+		.category__title {
+			position: relative;
+			padding: 1rem;
+			padding-left: 1.25rem;
+			font-weight: bold;
+			cursor: pointer;
+			user-select: none;
+		}
+
+		.category__title:hover {
+			opacity: .75;
+		}
+
+		.category__title::before {
+			content: '▶';
+			position: absolute;
+			top: 1rem;
+			left: 0;
+			transform: scale(.75);
+			transition: transform 500ms;
+		}
+
+		.category.is-expanded .category__title::before {
+			transform: scale(.75) rotate(90deg);
+		}
+
 		.block {
 			margin-bottom: 1rem;
 			border: 1px solid slateblue;
 			border-radius: .125rem;
 			box-shadow: 0 2px 4px gainsboro;
 			overflow: hidden;
-			transition: max-height 200ms;
+			transition: max-height 500ms;
 		}
 
 		.block p {
@@ -93,37 +128,73 @@
 	</style>
 </head>
 <body>
+
 	<main>
     <h1>Collapsible</h1>
-    <p>A plug and play plugin for expanding and collapsing elements (i.e. accordion) on a website.</p>
-		<div class="block" data-collapsible>
-			<div class="block__title"><h3>Facilis dolor</h3></div>
-			<div class="block__content">
-				<p>Est natus repudiandae, temporibus similique et, voluptas veritatis sit eum facilis dolor aliquam dignissimos obcaecati minus pariatur quam doloribus! Deserunt, rem architecto.</p>
+		<p>A plug and play plugin for expanding and collapsing elements (i.e. accordion) on a website.</p>
+		<div class="category" data-collapsible>
+			<div class="category__title"><span>Category list A</span></div>
+			<div class="block" data-collapsible>
+				<div class="block__title"><h3>Facilis dolor</h3></div>
+				<div class="block__content">
+					<p>Est natus repudiandae, temporibus similique et, voluptas veritatis sit eum facilis dolor aliquam dignissimos obcaecati minus pariatur quam doloribus! Deserunt, rem architecto.</p>
+				</div>
+			</div>
+			<div class="block" data-collapsible>
+				<div class="block__title"><h3>Provident accusantium</h3></div>
+				<div class="block__content">
+					<p>Ducimus minima incidunt iste, asperiores nam eum provident accusantium animi culpa? Odit molestias eum natus omnis illo, veniam debitis est adipisci quisquam?</p>
+					<p>At voluptatibus dignissimos itaque, architecto ipsum inventore laborum officiis assumenda a deserunt ducimus, asperiores odio autem minima accusantium, est magnam praesentium quasi?</p>
+					<p>Magnam laboriosam modi perspiciatis ipsum aliquam similique porro velit deleniti dolorem minus quos, reprehenderit nemo aliquid exercitationem doloremque id! Quidem, quasi at!</p>
+				</div>
+			</div>
+			<div class="block" data-collapsible>
+				<div class="block__title"><h3>Voluptas excepturi</h3></div>
+				<div class="block__content">
+					<p>Consequatur reiciendis cumque dolorum repudiandae voluptas excepturi, minus repellat pariatur sequi, quam voluptatem repellendus perspiciatis libero nesciunt molestias autem aspernatur officiis illum!</p>
+					<p>Ducimus nihil repellat voluptate quo perspiciatis, magnam libero qui veniam, est facilis maxime nostrum in dicta accusamus iste voluptates consequatur nisi enim?</p>
+				</div>
 			</div>
 		</div>
-		<div class="block" data-collapsible>
-			<div class="block__title"><h3>Provident accusantium</h3></div>
-			<div class="block__content">
-				<p>Ducimus minima incidunt iste, asperiores nam eum provident accusantium animi culpa? Odit molestias eum natus omnis illo, veniam debitis est adipisci quisquam?</p>
-				<p>At voluptatibus dignissimos itaque, architecto ipsum inventore laborum officiis assumenda a deserunt ducimus, asperiores odio autem minima accusantium, est magnam praesentium quasi?</p>
-				<p>Magnam laboriosam modi perspiciatis ipsum aliquam similique porro velit deleniti dolorem minus quos, reprehenderit nemo aliquid exercitationem doloremque id! Quidem, quasi at!</p>
+
+		<div class="category" data-collapsible data-collapsible-collapsed>
+			<div class="category__title"><span>Category List B</span></div>
+
+			<div class="block" data-collapsible>
+				<div class="block__title"><h3>Facilis dolor</h3></div>
+				<div class="block__content">
+					<p>Est natus repudiandae, temporibus similique et, voluptas veritatis sit eum facilis dolor aliquam dignissimos obcaecati minus pariatur quam doloribus! Deserunt, rem architecto.</p>
+				</div>
 			</div>
-		</div>
-		<div class="block" data-collapsible>
-			<div class="block__title"><h3>Voluptas excepturi</h3></div>
-			<div class="block__content">
-				<p>Consequatur reiciendis cumque dolorum repudiandae voluptas excepturi, minus repellat pariatur sequi, quam voluptatem repellendus perspiciatis libero nesciunt molestias autem aspernatur officiis illum!</p>
-				<p>Ducimus nihil repellat voluptate quo perspiciatis, magnam libero qui veniam, est facilis maxime nostrum in dicta accusamus iste voluptates consequatur nisi enim?</p>
+			<div class="block" data-collapsible>
+				<div class="block__title"><h3>Provident accusantium</h3></div>
+				<div class="block__content">
+					<p>Ducimus minima incidunt iste, asperiores nam eum provident accusantium animi culpa? Odit molestias eum natus omnis illo, veniam debitis est adipisci quisquam?</p>
+					<p>At voluptatibus dignissimos itaque, architecto ipsum inventore laborum officiis assumenda a deserunt ducimus, asperiores odio autem minima accusantium, est magnam praesentium quasi?</p>
+					<p>Magnam laboriosam modi perspiciatis ipsum aliquam similique porro velit deleniti dolorem minus quos, reprehenderit nemo aliquid exercitationem doloremque id! Quidem, quasi at!</p>
+				</div>
+			</div>
+			<div class="block" data-collapsible>
+				<div class="block__title"><h3>Voluptas excepturi</h3></div>
+				<div class="block__content">
+					<p>Consequatur reiciendis cumque dolorum repudiandae voluptas excepturi, minus repellat pariatur sequi, quam voluptatem repellendus perspiciatis libero nesciunt molestias autem aspernatur officiis illum!</p>
+					<p>Ducimus nihil repellat voluptate quo perspiciatis, magnam libero qui veniam, est facilis maxime nostrum in dicta accusamus iste voluptates consequatur nisi enim?</p>
+				</div>
 			</div>
 		</div>
 	</main>
-	<script src="collapsible.js"></script>
+
+	<script src="../collapsible.js"></script>
 	<script>
 		new Collapsible(
 			document.querySelectorAll('.block'),
 			'.block__title',
 			true
+		);
+
+		new Collapsible(
+			document.querySelectorAll('.category'),
+			'.category__title'
 		);
 	</script>
 </body>

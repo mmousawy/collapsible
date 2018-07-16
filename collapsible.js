@@ -28,7 +28,7 @@
   };
 
   /**
-   * Initializes the collapsing and expanding functionality.
+   * Initialize the collapsing and expanding functionality
    *
    * @param {(HTMLElement|NodeList)} node - The HTML element that will be manipulated.
    * @param {HTMLElement} [eventNode] - The HTML element on which the eventListener will be attached.
@@ -42,7 +42,8 @@
     this.isCollapsed = ((isCollapsed
                          && typeof isCollapsed === 'boolean')
                          ? isCollapsed
-                         : false);
+                         : false
+                       || (typeof this.node.dataset.collapsibleCollapsed !== 'undefined'));
 
     if (this.isCollapsed) {
       this.node.style.maxHeight = this.collapsedHeight + 'px';
@@ -55,15 +56,17 @@
       this.toggleCollapse();
     }.bind(this));
 
-    window.addEventListener('resize', this.updateHeights.bind(this));
+    window.addEventListener('resize', this.updateHeights.bind(this, 0));
 
     node.collapsible = this;
   };
 
   /**
-   * Updates the collapsed and expanded heights on page resize
+   * Update the collapsed and expanded heights on page resize
    */
-  Collapsible.prototype.updateHeights = function() {
+  Collapsible.prototype.updateHeights = function(heightDifference) {
+    heightDifference = heightDifference || 0;
+
     // Calculate the collapsed height
     this.collapsedHeight = Collapsible.parseNumber(
       window.getComputedStyle(this.eventNode)['height']
@@ -76,17 +79,20 @@
       window.getComputedStyle(this.node)['height']
     );
 
+    // Add or subtract the childNode's height difference
+    this.expandedHeight += heightDifference;
+    this.expandedHeight =  Math.max(this.expandedHeight, this.collapsedHeight);
+
+    // Reset height to what it was before
     if (this.isCollapsed) {
       this.node.style.maxHeight = this.collapsedHeight + 'px';
-    } else {
-      this.node.style.maxHeight = this.expandedHeight + 'px';
     }
 
-    console.log(this.collapsedHeight);
+    this.updateParentNode(this.expandedHeight - this.collapsedHeight);
   };
 
   /**
-   * Toggles the node state and calls the appropriate function
+   * Toggle the node state and calls the appropriate function
    */
   Collapsible.prototype.toggleCollapse = function() {
     if (this.isCollapsed) {
@@ -97,19 +103,24 @@
   };
 
   /**
-   * Collapses the node
+   * Collapse the node
    */
   Collapsible.prototype.collapse = function() {
-    console.log(this.collapsedHeight);
+    this.node.style.maxHeight = window.getComputedStyle(this.node)['height'];
+
+    void this.node.offsetWidth;
+
     this.node.style.maxHeight = this.collapsedHeight + 'px';
     this.node.classList.remove('is-expanded');
     this.node.classList.add('is-collapsed');
 
     this.isCollapsed = true;
+
+    this.updateParentNode(-(this.expandedHeight - this.collapsedHeight));
   };
 
   /**
-   * Expands the node
+   * Expand the node
    */
   Collapsible.prototype.expand = function() {
     this.node.style.height = 'auto';
@@ -118,6 +129,17 @@
     this.node.classList.add('is-expanded');
 
     this.isCollapsed = false;
+
+    this.updateParentNode(this.expandedHeight - this.collapsedHeight);
+  };
+
+  /**
+   * Update parent heights if collapsible
+   */
+  Collapsible.prototype.updateParentNode = function(heightDifference) {
+    if (this.node.parentNode.collapsible) {
+      this.node.parentNode.collapsible.updateHeights(heightDifference);
+    }
   };
 
   // Helper functions
